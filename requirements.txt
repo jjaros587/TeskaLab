@@ -1,2 +1,4 @@
 jsonpath_ng
 pymongo
+click
+jaraco.docker

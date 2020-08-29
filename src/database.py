@@ -1,12 +1,15 @@
 import pymongo
-from src.singleton import singleton
+from src.utils import singleton
+from jaraco.docker import is_docker
 
 
 @singleton
 class Database:
 
+    host = "mongo" if is_docker() else "localhost"
+
     def __init__(self):
-        self.client = pymongo.MongoClient("mongodb://localhost:27017/")
+        self.client = pymongo.MongoClient("mongodb://%s:27017/" % self.host)
         self.collection = self.client['db']['containers']
 
     def save_data(self, data):

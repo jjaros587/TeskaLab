@@ -15,8 +15,8 @@ async def get_required_data(data):
     }
 
 
-def save():
-    with open("data/sample-data.json", 'r') as file:
+def save(filename):
+    with open(filename, 'r') as file:
         data = json.load(file)
 
     loop = asyncio.get_event_loop()

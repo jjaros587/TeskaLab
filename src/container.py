@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from jsonpath_ng import parse
 
 
@@ -14,7 +15,8 @@ class Container:
         return self._get_object("name")
 
     def get_creation(self):
-        return self._get_object("created_at")
+        date = datetime.strptime(self._get_object("created_at"), '%Y-%m-%dT%H:%M:%S%z')
+        return date.replace(tzinfo=timezone.utc).timestamp()
 
     def get_status(self):
         return self._get_object("state.status")
